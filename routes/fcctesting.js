@@ -66,7 +66,7 @@ module.exports = function (app) {
     function (req, res, next) {
       console.log(error);
       if (!error && process.env.NODE_ENV === "test") return next();
-      res.json({ status: "unavailable" });
+      res.json([{ status: "unavailable" }]);
     },
     function (req, res, next) {
       if (!runner.report) return next();
