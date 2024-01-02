@@ -66,7 +66,7 @@ module.exports = function (app) {
     function (req, res, next) {
       console.log(error);
       if (!error && process.env.NODE_ENV === "test") return next();
-      res.json([{ status: "unavailable" }]);
+      res.json({ status: "unavailable" });
     },
     function (req, res, next) {
       if (!runner.report) return next();
@@ -97,14 +97,11 @@ function testFilter(tests, type, n) {
   let out;
   switch (type) {
     case "unit":
-      out = tests.filter((t) => t.context && t.context.match("Unit Tests"));
+      out = tests.filter((t) => t.context.match("Unit Tests"));
       break;
     case "functional":
       out = tests.filter(
-        (t) =>
-          t.context &&
-          t.context.match("Functional Tests") &&
-          !t.title.match("#example")
+        (t) => t.context.match("Functional Tests") && !t.title.match("#example")
       );
       break;
     default:
